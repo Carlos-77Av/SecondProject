@@ -1,11 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Menus {
-    public static void subjectMenu(){
+    public void subjectMenu(){
         Scanner read = new Scanner(System.in);
-        boolean incorrectOpc = false;
+        boolean incorrectOpc;
         do {
             System.out.println("Welcome to Project 2\n\n");
             System.out.println("::::::::::::: SUBJECTS :::::::::::::");
@@ -21,13 +21,11 @@ public class Menus {
                     incorrectOpc = false;
                     break;
                 case "2":
-                    System.out.println("Asi");
                     subMenu(opc, read, "history");
                     incorrectOpc = false;
 
                     break;
                 case "3":
-                    System.out.println("asf");
                     subMenu(opc, read, "programming");
                     incorrectOpc = false;
 
@@ -39,8 +37,8 @@ public class Menus {
         }while(incorrectOpc);
     }
 
-    public static void subMenu(String selection, Scanner read, String chose){
-        LinkedHashMap<String, String> studentData;
+    public void subMenu(String selection, Scanner read, String chose){
+        LinkedHashMap<String, String> studentData = new LinkedHashMap<>();
         boolean other = false;
         do{
             System.out.println("\n");
@@ -58,28 +56,40 @@ public class Menus {
 
                     //saving the information in a Map
                     studentData = subjectData.readData();
-
-                    //In an illustrative way the system print the information of the file
-                /*
-                for (Map.Entry data : studentData.entrySet()){
-                    System.out.println("Student name: " + data.getKey() + "\t\t Student grade: " + data.getValue());
-                }
-                 */
-                    Statistics stats = new Statistics();
-                    stats.minGrade(studentData); // Change the recursive function and use a do while loop
-
-                    System.out.println("\nThe information has been loaded correctly.\n");
-
-                    //After reading the information, the system return to the previous menu
-                    subMenu(selection, read, chose);
+                    //changing the boolean variable for stop looping
+                    other = true;
 
                     break;
                 case "2":
-                    System.out.println("::::::::::::: Generate and send report :::::::::::::");
-
+                    System.out.println("::::::::::::: Add students manually :::::::::::::");
+                    try{
+                        System.out.print("Please, enter the student name: ");
+                        String sName = read.next();
+                        System.out.print("Please, enter the student grade (0-10): ");
+                        double sGrade = read.nextDouble();
+                        if (sGrade >= 0 && sGrade <= 10){
+                            boolean rep;
+                            do {
+                                Students addStudent = new Students(sName, sGrade);
+                                rep = addStudent.AddStudents(read, studentData);
+                            }while (rep);
+                        }
+                        else{
+                            System.out.println("\n\nThe grade entered is not correct.");
+                        }
+                    }catch (InputMismatchException ex){
+                        System.out.println("The name must be between 0 and 10");
+                    }
                     break;
                 case "3":
                     System.out.println();
+                    Statistics stats = new Statistics();
+                    stats.minGrade(studentData); // Change the recursive function and use a do while loop
+                    stats.maxGrade(studentData);
+                    stats.avgGrade(studentData);
+                    stats.mostRepGrade(studentData);
+
+                    System.out.println("\nThe information has been loaded correctly.\n");
 
                     break;
                 case "4":
@@ -90,6 +100,5 @@ public class Menus {
                     subMenu(selection, read, chose);
             }
         }while(other);
-
     }
 }

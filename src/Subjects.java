@@ -10,15 +10,16 @@ public class Subjects {
         this.file = file;
     }
 
+
     public LinkedHashMap<String, String> readData(){
         LinkedHashMap<String, String> data = new LinkedHashMap<>();
-        LinkedHashMap<String, String> email = new LinkedHashMap<>();
         File txt = new File(file);
         try{
             Scanner readerFile = new Scanner(txt);
-            email.put("email", readerFile.nextLine());
+            data.put("email", readerFile.nextLine());
             while (readerFile.hasNext()){
-                data.put(readerFile.nextLine().split(",")[0], readerFile.nextLine().split(",")[1]);
+                String[] parts = readerFile.nextLine().split(",");
+                data.put(parts[0], parts[1].trim());
             }
         }catch(IOException ex){
             System.out.println("An error occurred loading the txt file");

@@ -1,5 +1,5 @@
 history@gmail.com
-Maria, 9
+Maria, 1
 Josselin, 2
 Cristian, 4
 Hernan, 8
@@ -11,16 +11,16 @@ Franklin, 7
 Lisbeth, 6
 Perla, 5
 Rosa, 4
-Martiza, 5
+Julia, 5
 Carlos, 10
-Herson, 9
+Gerson, 9
 Martha, 10
 Samuel, 6
 David, 7
 Edwin, 9
 Evelin, 10
 Gisela, 10
-Lluvia, 3
+Matilda, 3
 Armando, 1
 Oscar, 3
 Victor, 6

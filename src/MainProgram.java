@@ -27,12 +27,10 @@
         All the application must be written in english (all, all, all).
 */
 
-
-import java.util.*;
-
 public class MainProgram {
     public static void main(String[] args){
         //Showing the initial menu
+
         Menus menu = new Menus();
         menu.subjectMenu();
     }
